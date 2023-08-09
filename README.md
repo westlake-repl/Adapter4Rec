@@ -4,7 +4,7 @@ This repository contains the source code for the paper **''Exploring Adapter-bas
 
 Full version in [[PDF]](https://arxiv.org/pdf/2305.15036.pdf).
 
-![](Fig/Adapter4Rec.pdf) 
+![](Fig/Adapter4Rec.jpg) 
 
 ## Abstract
 
