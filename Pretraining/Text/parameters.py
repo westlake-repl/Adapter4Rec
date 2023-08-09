@@ -37,7 +37,6 @@ def parse_args():
     parser.add_argument("--label_screen", type=str, default='None')
     parser.add_argument("--logging_num", type=int, default=8)
     parser.add_argument("--testing_num", type=int, default=1)
-    # 当前进程对应的GPU号
     parser.add_argument("--local_rank", default=-1, type=int)
 
     # ============== news information==============
