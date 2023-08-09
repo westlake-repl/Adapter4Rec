@@ -2,7 +2,6 @@
 
 This repository contains the source code for the paper **''Exploring Adapter-based Transfer Learning for Recommender Systems: Empirical Studies and Practical Insights ''**.
 
-Full version in [[PDF]](https://arxiv.org/pdf/2305.15036.pdf).
 
 ![](Fig/Adapter4Rec.jpg) 
 
