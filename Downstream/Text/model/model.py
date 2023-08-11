@@ -50,13 +50,13 @@ class Model(torch.nn.Module):
             input_embs_all = self.bert_encoder(sample_items)  # [2688, 64]
         else:
             input_embs_all = self.id_embedding(sample_items)
-        input_embs = input_embs_all.view(-1, self.max_seq_len, 2, self.args.embedding_dim)  # [64, 21, 2, 64] 还原原本的长度
+        input_embs = input_embs_all.view(-1, self.max_seq_len, 2, self.args.embedding_dim)
         pos_items_embs = input_embs[:, :, 0]
         neg_items_embs = input_embs[:, :, 1]
 
-        input_logs_embs = pos_items_embs[:, :-1, :]  # 用于后续的输入
-        target_pos_embs = pos_items_embs[:, 1:, :]  # 用于后续的输出
-        target_neg_embs = neg_items_embs[:, :-1, :]  # 用于后续的输入作为负样本
+        input_logs_embs = pos_items_embs[:, :-1, :]  
+        target_pos_embs = pos_items_embs[:, 1:, :]
+        target_neg_embs = neg_items_embs[:, :-1, :]
 
         prec_vec = self.user_encoder(input_logs_embs, log_mask, local_rank)
         pos_score = (prec_vec * target_pos_embs).sum(-1)
@@ -172,14 +172,14 @@ class KAdapterModel(nn.Module):
         self.com_dense2 = nn.Linear(args.embedding_dim * 2, args.embedding_dim)
 
     def forward(self, sample_items, log_mask, local_rank):
-        # 为item部分添加adapter
+
         for name in self.newsname:
             text = torch.narrow(sample_items, 1, self.pretrained_model.bert_encoder.attributes2start[name],
                                 self.pretrained_model.bert_encoder.attributes2length[name])
         batch_size, num_words = text.shape  # 2688, 60
         num_words = num_words // 2
 
-        # 切开这个text，分为id和mask
+
         text_ids = torch.narrow(text, 1, 0, num_words)
         text_attmask = torch.narrow(text, 1, num_words, num_words)
         outputs = self.pretrained_model.bert_encoder.text_encoders.title.bert_model(input_ids=text_ids,
@@ -204,25 +204,24 @@ class KAdapterModel(nn.Module):
         pos_items_embs = input_embs[:, :, 0]
         neg_items_embs = input_embs[:, :, 1]
 
-        input_logs_embs = pos_items_embs[:, :-1, :]  # 用于后续的输入
-        target_pos_embs = pos_items_embs[:, 1:, :]  # 用于后续的输出
-        target_neg_embs = neg_items_embs[:, :-1, :]  # 用于后续的输入作为负样本
+        input_logs_embs = pos_items_embs[:, :-1, :]
+        target_pos_embs = pos_items_embs[:, 1:, :]
+        target_neg_embs = neg_items_embs[:, :-1, :]
 
-        # user encoder 部分
-        att_mask = (log_mask != 0)  # 返回一个布尔的tensor,维度为[64, 20]
+        # user encoder
+        att_mask = (log_mask != 0)  
         att_mask = att_mask.unsqueeze(1).unsqueeze(2)  # torch.bool [64, 1, 1, 20]
         att_mask = torch.tril(att_mask.expand((-1, -1, log_mask.size(-1), -1))).to(local_rank)  # att_mask
-        att_mask = torch.where(att_mask, 0., -1e9)  # 调成负无穷
+        att_mask = torch.where(att_mask, 0., -1e9)  
         input_embs = input_logs_embs
 
         # use the pretrained model's weight to optimize
         position_ids = torch.arange(log_mask.size(1), dtype=torch.long,
                                     device=log_mask.device)  # input_embs的shape [batch_size,seq_len,embedding_dim]
-        position_ids = position_ids.unsqueeze(0).expand_as(log_mask)  # 这个是position_embedding要加的东西
-        # 这里的self.position_embedding(position_ids))，将position ids的维度从64 20 拉到 64 20 64 提升了对应的维度之后与原始的input_embs相加
+        position_ids = position_ids.unsqueeze(0).expand_as(log_mask)  
         output = self.pretrained_model.user_encoder.transformer_encoder.layer_norm(
             input_embs + self.pretrained_model.user_encoder.transformer_encoder.position_embedding(position_ids))
-        output = self.pretrained_model.user_encoder.transformer_encoder.dropout(output)  # [64, 20, 64] 本质就是之前的
+        output = self.pretrained_model.user_encoder.transformer_encoder.dropout(output) 
 
         hidden_states_last = torch.zeros(output.size()).to(local_rank)
         # adding the logs_adapter here
@@ -233,8 +232,7 @@ class KAdapterModel(nn.Module):
             output = transformer(output, att_mask)
 
         output = self.com_dense2(torch.cat([output, hidden_states_last], dim=2))
-        # TODO 这里的部分要主要修改，要用到，这个不能直接用user_encoder,需要从module里面拿adapter,现在还是原有的pretrained模型
-        # Serial插入，sasrec的transformer block
+
         prec_vec = output
         pos_score = (prec_vec * target_pos_embs).sum(-1)
         neg_score = (prec_vec * target_neg_embs).sum(-1)
@@ -345,8 +343,7 @@ class SASRecAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
+
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -393,8 +390,7 @@ class SASRecPfeifferVer2AdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
+
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -441,8 +437,6 @@ class SASRecPfeifferAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -491,7 +485,6 @@ class SASRecParallelAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
         # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
@@ -668,8 +661,6 @@ class SASRecCompacterAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
