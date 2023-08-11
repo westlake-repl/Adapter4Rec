@@ -1,4 +1,3 @@
-# The codes are from https://github.com/bayer-science-for-a-better-life/phc-gnn
 from typing import Union, Optional
 
 import torch
@@ -12,16 +11,6 @@ def matvec_product(W: torch.Tensor, x: torch.Tensor,
                    bias: Optional[torch.Tensor],
                    phm_rule: Union[torch.Tensor],
                    kronecker_prod=False) -> torch.Tensor:
-    """
-    Functional method to compute the generalized matrix-vector product based on the paper
-    "Parameterization of Hypercomplex Multiplications (2020)"
-    https://openreview.net/forum?id=rcQdycl0zyk
-    y = Hx + b , where W is generated through the sum of kronecker products from the Parameterlist W, i.e.
-    W is a an order-3 tensor of size (phm_dim, in_features, out_features)
-    x has shape (batch_size, phm_dim*in_features)
-    phm_rule is an order-3 tensor of shape (phm_dim, phm_dim, phm_dim)
-    H = sum_{i=0}^{d} mul_rule \otimes W[i], where \otimes is the kronecker product
-    """
     if kronecker_prod:
         H = kronecker_product(phm_rule, W).sum(0)
     else:
