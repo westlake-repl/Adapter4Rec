@@ -36,11 +36,10 @@ class SelfAttention(nn.Module):
         self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, query, key, value, mask):
-        # 这里的 key.transpose(-2, -1) shape是[64, 2, 32, 20] query的是[64, 2, 20, 32]
-        attn = torch.matmul(query, key.transpose(-2, -1)) / self.temperature  # [64, 2, 20, 20]
+        attn = torch.matmul(query, key.transpose(-2, -1)) / self.temperature
         attn = attn + mask
         p_attn = self.dropout(self.softmax(attn))
-        return torch.matmul(p_attn, value), p_attn  # torch.Size([64, 2, 20, 32]),torch.Size([64, 2, 20, 20])
+        return torch.matmul(p_attn, value), p_attn  
 
 
 class MultiHeadedAttention(nn.Module):
@@ -62,11 +61,9 @@ class MultiHeadedAttention(nn.Module):
         self.layer_norm = nn.LayerNorm(d_model, eps=1e-6)
 
     def forward(self, query, key, value, mask):
-        # 这里的self attention q, k v都是经过position embedding之后的input_embeddings
+
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.w_Q(query).view(sz_b, len_q, self.n_heads, self.d_k).transpose(1, 2)
         k = self.w_K(key).view(sz_b, len_k, self.n_heads, self.d_k).transpose(1, 2)
         v = self.w_V(value).view(sz_b, len_v, self.n_heads, self.d_v).transpose(1, 2)
@@ -104,10 +101,9 @@ class TransformerEncoder(torch.nn.Module):
     def forward(self, input_embs, log_mask, att_mask):
         position_ids = torch.arange(log_mask.size(1), dtype=torch.long,
                                     device=log_mask.device)  # input_embs的shape [batch_size,seq_len,embedding_dim]
-        position_ids = position_ids.unsqueeze(0).expand_as(log_mask)  # 这个是position_embedding要加的东西
-        # 这里的self.position_embedding(position_ids))，将position ids的维度从64 20 拉到 64 20 64 提升了对应的维度之后与原始的input_embs相加
+        position_ids = position_ids.unsqueeze(0).expand_as(log_mask)  
         output = self.layer_norm(input_embs + self.position_embedding(position_ids))
-        output = self.dropout(output)  # [64, 20, 64] 本质就是之前的
+        output = self.dropout(output)
 
         if "SASRecKAdaptedTransformerBlocks" in str(type(self.transformer_blocks)):
             output = self.transformer_blocks(output, att_mask)
