@@ -100,7 +100,7 @@ class TransformerEncoder(torch.nn.Module):
 
     def forward(self, input_embs, log_mask, att_mask):
         position_ids = torch.arange(log_mask.size(1), dtype=torch.long,
-                                    device=log_mask.device)  # input_embs的shape [batch_size,seq_len,embedding_dim]
+                                    device=log_mask.device)  # input_embs [batch_size,seq_len,embedding_dim]
         position_ids = position_ids.unsqueeze(0).expand_as(log_mask)  
         output = self.layer_norm(input_embs + self.position_embedding(position_ids))
         output = self.dropout(output)
