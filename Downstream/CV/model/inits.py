@@ -1,4 +1,3 @@
-# The codes are from https://github.com/bayer-science-for-a-better-life/phc-gnn
 import math
 
 import torch
