@@ -6,7 +6,7 @@ def parse_args():
 
     # ============== data_dir ==============
     parser.add_argument("--mode", type=str, default="train", choices=['train', 'test', 'load'])
-    parser.add_argument("--item_tower", type=str, default="id", choices=['modal', 'id'])
+    parser.add_argument("--item_tower", type=str, default="modal", choices=['modal', 'id'])
     parser.add_argument("--root_data_dir", type=str, default="../", )
     parser.add_argument("--dataset", type=str, default='MIND-small')
     parser.add_argument("--behaviors", type=str, default='behaviors_l5_tr_v.tsv')
@@ -37,7 +37,6 @@ def parse_args():
     parser.add_argument("--label_screen", type=str, default='None')
     parser.add_argument("--logging_num", type=int, default=8)
     parser.add_argument("--testing_num", type=int, default=1)
-    # 当前进程对应的GPU号
     parser.add_argument("--local_rank", default=-1, type=int)
 
     # ============== news information==============

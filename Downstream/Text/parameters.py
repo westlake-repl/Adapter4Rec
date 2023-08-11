@@ -6,7 +6,7 @@ def parse_args():
 
     # ============== data_dir ==============
     parser.add_argument("--mode", type=str, default="train", choices=['train', 'test', 'load'])
-    parser.add_argument("--item_tower", type=str, default="id", choices=['modal', 'id'])
+    parser.add_argument("--item_tower", type=str, default="modal", choices=['modal', 'id'])
     parser.add_argument("--root_data_dir", type=str, default="../", )
     parser.add_argument("--dataset", type=str, default='Adressa')
     parser.add_argument("--behaviors", type=str, default='Adressa_users_base.tsv')

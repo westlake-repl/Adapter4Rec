@@ -27,7 +27,6 @@ def test(args, use_modal, local_rank):
             cv_model_load = '../pretrained_models/' + args.CV_model_load
             cv_model = ViTMAEModel.from_pretrained(cv_model_load)
         elif 'vit' in args.CV_model_load:
-            # cv_model_load = '/yuanzheng/id_modal/pretrained_models/swin/' + args.CV_model_load
             cv_model_load = '../pretrained_models/vit-base-patch16-224'
             cv_model = ViTForImageClassification.from_pretrained(cv_model_load)
             num_fc_ftr = cv_model.classifier.in_features
@@ -98,7 +97,6 @@ def train(args, use_modal, local_rank):
             cv_model_load = '../pretrained_models/' + args.CV_model_load
             cv_model = ViTMAEModel.from_pretrained(cv_model_load)
         elif 'vit' in args.CV_model_load:
-            # cv_model_load = '/yuanzheng/id_modal/pretrained_models/swin/' + args.CV_model_load
             cv_model_load = '../pretrained_models/vit-base-patch16-224'
             cv_model = ViTForImageClassification.from_pretrained(cv_model_load)
             num_fc_ftr = cv_model.classifier.in_features
