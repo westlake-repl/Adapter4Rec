@@ -527,7 +527,7 @@ def train(args, use_modal, local_rank):
         {'params': adapter_bert_params, 'lr': args.adapter_bert_lr},
         {'params': adapter_recsys_params, 'lr': args.adapter_sasrec_lr}
     ])
-    if 'None' not in args.load_ckpt_name:  # load 优化器状态
+    if 'None' not in args.load_ckpt_name:
         optimizer.load_state_dict(checkpoint2["optimizer"])
         Log_file.info(f"optimizer loaded from {ckpt_path2}")
 
