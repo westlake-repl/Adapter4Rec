@@ -22,10 +22,10 @@ class User_Encoder(torch.nn.Module):
                 constant_(module.bias.data, 0)
 
     def forward(self, input_embs, log_mask, local_rank):
-        att_mask = (log_mask != 0)  # 返回一个布尔的tensor,维度为[64, 20]
+        att_mask = (log_mask != 0)  
         att_mask = att_mask.unsqueeze(1).unsqueeze(2)  # torch.bool [64, 1, 1, 20]
         att_mask = torch.tril(att_mask.expand((-1, -1, log_mask.size(-1), -1))).to(local_rank)  # att_mask
-        att_mask = torch.where(att_mask, 0., -1e9)  # 调成负无穷
+        att_mask = torch.where(att_mask, 0., -1e9) 
         return self.transformer_encoder(input_embs, log_mask, att_mask)
 
 
@@ -48,13 +48,10 @@ class Text_Encoder(torch.nn.Module):
     def forward(self, text):
         batch_size, num_words = text.shape  # 2688, 60
         num_words = num_words // 2
-        # 切开这个text，分为id和mask
         text_ids = torch.narrow(text, 1, 0, num_words)
         text_attmask = torch.narrow(text, 1, num_words, num_words)
-        # id 经过bert模型，mask放到attention_mask,(2688, 30, 768) 一共是30个词，现在只看cls的了cls是第一个
         hidden_states = self.bert_model(input_ids=text_ids, attention_mask=text_attmask)[0]
         # mean_pool = mean_pooling(self.bert_model(input_ids=text_ids, attention_mask=text_attmask),text_attmask)
-        # 只用cls的,hidden_states[:, 0],[2688, 768] -> (2688, 64)
         cls = self.fc(hidden_states[:, 0])
         # mean_pool = self.fc(mean_pool)
         return self.activate(cls)
