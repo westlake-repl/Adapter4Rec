@@ -1,8 +1,7 @@
-# The codes are from https://github.com/bayer-science-for-a-better-life/phc-gnn
+
 import torch
 
 # TODO: change this with torch.kron
-"""A part of the pylabyk library: numpytorch.py at https://github.com/yulkang/pylabyk"""
 
 
 def kronecker_product(a, b):
