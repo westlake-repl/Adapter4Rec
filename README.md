@@ -60,6 +60,6 @@ cd Downstream/Text/script
 python adapter_houlsby.py
 ```
 
-We report the test results of the checkpoint with the best validation checkpoint.
+We report the test results of the checkpoint with the best validation result.
 
 
