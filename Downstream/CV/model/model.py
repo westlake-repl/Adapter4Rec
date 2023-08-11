@@ -246,8 +246,7 @@ class SASRecAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
+
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -293,8 +292,6 @@ class SASRecPfeifferV2AdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -340,8 +337,6 @@ class SASRecParallelAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
@@ -481,8 +476,6 @@ class SASRecCompacterAdaptedSelfOutput(nn.Module):
         query, key, value = block_input, block_input, block_input
         sz_b, len_q, len_k, len_v = query.size(0), query.size(1), key.size(1), value.size(1)
         residual = query
-        # 默认使用的都是2头的,经过self.w_Q(query)之后还是[64, 20, 64],view之后变为[64, 20, 2, 32],等于是把两个头分出来，
-        # transpose之后[64, 2, 20, 32]
         q = self.transformer_block.multi_head_attention.w_Q(query).view(sz_b, len_q,
                                                                         self.transformer_block.multi_head_attention.n_heads,
                                                                         self.transformer_block.multi_head_attention.d_k).transpose(
