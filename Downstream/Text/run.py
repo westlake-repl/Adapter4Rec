@@ -586,7 +586,7 @@ def train(args, use_modal, local_rank):
         for data in train_dl:
             sample_items, log_mask = data
             sample_items, log_mask = sample_items.to(local_rank), log_mask.to(
-                local_rank)  # 此时sample item->[64, 21, 2, 60] log_mask->[64, 20]
+                local_rank) 
             if use_modal:
                 sample_items = sample_items.view(-1, sample_items.size(
                     -1))
