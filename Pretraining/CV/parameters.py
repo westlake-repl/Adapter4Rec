@@ -6,7 +6,7 @@ def parse_args():
 
     # ============== data_dir ==============
     parser.add_argument("--mode", type=str, default="train")
-    parser.add_argument("--item_tower", type=str, default="id")
+    parser.add_argument("--item_tower", type=str, default="modal")
     parser.add_argument("--root_data_dir", type=str, default="../", )
     parser.add_argument("--dataset", type=str, default='pinterest')
     parser.add_argument("--behaviors", type=str, default='users_log.tsv')
