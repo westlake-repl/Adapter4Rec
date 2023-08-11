@@ -281,7 +281,7 @@ def train(args, use_modal, local_rank):
     else:
         optimizer = optimizer = optim.Adam(model.module.parameters(), lr=args.lr)
 
-    if 'None' not in args.load_ckpt_name:  # load 优化器状态
+    if 'None' not in args.load_ckpt_name: 
         optimizer.load_state_dict(checkpoint["optimizer"])
         Log_file.info(f"optimizer loaded from {ckpt_path}")
 
