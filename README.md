@@ -1,6 +1,6 @@
-# Adapter4Rec
+# Adapter4Rec （WSDM2024）
 
-This repository contains the source code for our WSDM2024 Paper: **''[Exploring Adapter-based Transfer Learning for Recommender Systems: Empirical Studies and Practical Insights](https://arxiv.org/pdf/2305.15036.pdf)''**. 
+This repository contains the source code for our Paper: **''[Exploring Adapter-based Transfer Learning for Recommender Systems: Empirical Studies and Practical Insights](https://arxiv.org/pdf/2305.15036.pdf)''**. 
 
 
 ![](Fig/Adapter4Rec.jpg) 
