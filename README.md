@@ -25,7 +25,7 @@ To this end, we perform  empirical studies  to address several key sub-questions
 
 ## Preparation
 
-The complete textual recommendation dataset (MIND & Adressa) is available under the Dataset directory. In terms of the datasets with images (HM, Amazon, Bili etc.), we will release the raw images of them upon acceptence along with the pretrained checkpoints.
+The complete textual recommendation dataset (MIND & Adressa) is available under the Dataset directory. 
 
 ### Pre-trained Model Download
 
