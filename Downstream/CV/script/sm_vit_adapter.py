@@ -17,7 +17,7 @@ item_tower = 'modal'
 
 epoch = 100
 load_ckpt_name = 'None'
-pretrained_recsys_model = 'epoch-59.pt'  # mae_epoch-60.pt:mae vit-sasrec:epoch-59.pt
+pretrained_recsys_model = 'epoch-59.pt'  # vit-sasrec:epoch-59.pt
 
 adapter_type = "pfeiffer_ver2"  # kadapter
 l2_weight_list = [0]
