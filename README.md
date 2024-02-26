@@ -47,7 +47,7 @@ We report details of the pre-trained Item ME we used in Table. Download the pyto
 | ViT<sub>base</sub>     | 86M     | https://huggingface.co/google/vit-base-patch16-224 |
 | MAE<sub>base</sub>     | 86M     | https://huggingface.co/facebook/vit-mae-base       |
 
-We provide the following pre-trained checkpoints with respective links:
+We provide the following checkpoints pre-trained on the source datasets:
 
 [SASRec+BERT](https://drive.google.com/file/d/16xIo2ygB4b3ERrg81zDzBXXUfdLw86Ss/view?usp=drive_link), [CPC+BERT](https://drive.google.com/file/d/1lqjH8z4Ta_jnxWTYdilL338OoYGPF9wW/view?usp=drive_link), [SASRec+ViT](https://drive.google.com/file/d/1aaWa6CK0an6RxPGFDOnDQXYgnkJd5HGP/view?usp=drive_link), and [CPC+ViT](https://drive.google.com/file/d/1YTKzg1ZgFrxAvM6xhCZnG49jeHCLSHIG/view?usp=drive_link)
 
@@ -63,7 +63,7 @@ cd Pretraining/Text/script
 python sm_base_sasrec.py
 ```
 
-We select the checkpoint with the best validation result as the pretrained checkpoint for the downstream tasks.
+We select the checkpoint with the best validation result as the pre-trained checkpoint for the downstream tasks.
 
 
 
