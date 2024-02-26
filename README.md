@@ -63,7 +63,7 @@ cd Pretraining/Text/script
 python sm_base_sasrec.py
 ```
 
-We select the checkpoint with the best validation result as the pre-trained checkpoint for the downstream tasks.
+We select the checkpoint with the best validation result as the pre-trained checkpoint for the downstream tasks. Please note that the pretraining process may take a considerable amount of time. Our pre-trained image recommendation model was trained on the source domain using four A40 GPUs for approximately 3 to 4 days.
 
 
 
@@ -75,6 +75,6 @@ cd Downstream/Text/script
 python adapter_houlsby.py
 ```
 
-We report the test results of the checkpoint with the best validation result.
+We report the test results of the checkpoint with the best validation result. 
 
 
