@@ -27,6 +27,13 @@ To this end, we perform  empirical studies  to address several key sub-questions
 
 The complete textual recommendation dataset (MIND & Adressa) is available under the Dataset directory. 
 
+Download the image files
+"hm_images.zip" for HM dataset from this [link](https://drive.google.com/file/d/1zm0V3th-_ZxAevQM5yt8tkbLHnXGc6lk/view?usp=drive_link)
+"am_image.zip" for Amazon Clothes&Shoes dataset from this [link](https://drive.google.com/file/d/1r8UJKFfhx_p93Q5DGOXDvXPq6PQYD_Iz/view?usp=drive_link)
+
+After downloading them, please put them under Dataset/HM and Dataset/Amazon, respectively. Finally, please use the "build_lmdb_hm.py" scripts from [IDvs.MoRec](https://drive.google.com/file/d/1r8UJKFfhx_p93Q5DGOXDvXPq6PQYD_Iz/view?usp=drive_link) to generate the LMDB file.
+
+
 ### Pre-trained Model Download
 
 We report details of the pre-trained Item ME we used in Table. Download the pytorch-version of them, and put the checkpoint `pytorch_model.bin` into the corresponding path under `pretrained_models/`
@@ -37,6 +44,12 @@ We report details of the pre-trained Item ME we used in Table. Download the pyto
 | RoBERTa<sub>base</sub> | 125M    | https://huggingface.co/roberta-base                |
 | ViT<sub>base</sub>     | 86M     | https://huggingface.co/google/vit-base-patch16-224 |
 | MAE<sub>base</sub>     | 86M     | https://huggingface.co/facebook/vit-mae-base       |
+
+We provide the following pre-trained checkpoints with respective links:
+
+[SASRec+BERT](https://drive.google.com/file/d/16xIo2ygB4b3ERrg81zDzBXXUfdLw86Ss/view?usp=drive_link), [CPC+BERT](https://drive.google.com/file/d/1lqjH8z4Ta_jnxWTYdilL338OoYGPF9wW/view?usp=drive_link), [SASRec+ViT](https://drive.google.com/file/d/1aaWa6CK0an6RxPGFDOnDQXYgnkJd5HGP/view?usp=drive_link), and [CPC+ViT](https://drive.google.com/file/d/1YTKzg1ZgFrxAvM6xhCZnG49jeHCLSHIG/view?usp=drive_link)
+
+The SASRec/CPC+BERT pretrained checkpoint should be placed under Downstream/Text/pretrained_models and SASRec/CPC+ViT under Downstream/CV/pretrained_models.
 
 ## Training
 
