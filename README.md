@@ -27,11 +27,13 @@ To this end, we perform  empirical studies  to address several key sub-questions
 
 The complete textual recommendation dataset (MIND & Adressa) is available under the Dataset directory. 
 
-Download the image files
+Download the image files:
+
 "hm_images.zip" for HM dataset from this [link](https://drive.google.com/file/d/1zm0V3th-_ZxAevQM5yt8tkbLHnXGc6lk/view?usp=drive_link)
+
 "am_image.zip" for Amazon Clothes&Shoes dataset from this [link](https://drive.google.com/file/d/1r8UJKFfhx_p93Q5DGOXDvXPq6PQYD_Iz/view?usp=drive_link)
 
-After downloading them, please put them under Dataset/HM and Dataset/Amazon, respectively. Finally, please use the "build_lmdb_hm.py" scripts from [IDvs.MoRec](https://drive.google.com/file/d/1r8UJKFfhx_p93Q5DGOXDvXPq6PQYD_Iz/view?usp=drive_link) to generate the LMDB file.
+Then put them under Dataset/HM and Dataset/Amazon, respectively. Finally, please use the "build_lmdb_hm.py" scripts from [IDvs.MoRec](https://github.com/westlake-repl/IDvs.MoRec/tree/main/dataset/HM) to generate the LMDB file.
 
 
 ### Pre-trained Model Download
