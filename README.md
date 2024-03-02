@@ -5,12 +5,12 @@ This repository contains the source code for our Paper: **''[Exploring Adapter-b
 🤗 **Resources**: four Large-scale datasets for evaluating foundation / transferable / multi-modal / LLM recommendaiton models.
 
 -  **PixelRec**: https://github.com/westlake-repl/PixelRec
-
--  **MicroLens(DeepMind Talk)**: https://github.com/westlake-repl/MicroLens
   
 -  **NineRec(TPAMI)**: https://github.com/westlake-repl/NineRec 
 
 -  **Tenrec(NeurIPS)**: https://github.com/yuangh-x/2022-NIPS-Tenrec
+  
+-  **MicroLens(DeepMind Talk)**: https://github.com/westlake-repl/MicroLens
 
 
 ![](Fig/Adapter4Rec.jpg) 
