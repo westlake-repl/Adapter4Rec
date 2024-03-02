@@ -2,6 +2,16 @@
 
 This repository contains the source code for our Paper: **''[Exploring Adapter-based Transfer Learning for Recommender Systems: Empirical Studies and Practical Insights](https://arxiv.org/pdf/2305.15036.pdf)''**. 
 
+🤗 **Resources**: four Large-scale datasets for evaluating foundation / transferable / multi-modal / LLM recommendaiton models.
+
+-  **PixelRec**: https://github.com/westlake-repl/PixelRec
+
+-  **MicroLens(DeepMind Talk)**: https://github.com/westlake-repl/MicroLens
+  
+-  **NineRec(TPAMI)**: https://github.com/westlake-repl/NineRec 
+
+-  **Tenrec(NeurIPS)**: https://github.com/yuangh-x/2022-NIPS-Tenrec
+
 
 ![](Fig/Adapter4Rec.jpg) 
 
