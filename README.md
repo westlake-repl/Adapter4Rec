@@ -9,7 +9,7 @@
 <a href="https://zhuanlan.zhihu.com/p/684389843" alt="中文博客"><img src="https://img.shields.io/badge/博客-中文-orange.svg?style=flat" /></a> 
 <a href="https://medium.com/@lifengyi_6964/parameter-efficient-adapter-transfer-for-multi-domain-recommendation-329bf3c32a60" alt="blog"><img src="https://img.shields.io/badge/Blog-English-blue.svg?style=flat" /></a> 
 ![Multi-Modal](https://img.shields.io/badge/Task-Multi--Modal-red) 
-![Foundation Model](https://img.shields.io/badge/Task-Foundation_Model-red) 
+![PEFT](https://img.shields.io/badge/Task-PEFT-red) 
 ![Transfer Learning](https://img.shields.io/badge/Task-Transfer_Learning-red) 
 ![Recommendation](https://img.shields.io/badge/Task-Recommendation-red) 
 
