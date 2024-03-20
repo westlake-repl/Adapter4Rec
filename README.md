@@ -15,10 +15,10 @@
 
 
 Quick Links: 
-[📋Blog](##Blog) |
-[🛠️Code](##Requirements) |
-[🗃️Resource](##Resource) |
-[📭Citation](##Citation) |
+[📋Blog](#Blog) |
+[🛠️Code](#Requirements) |
+[🗃️Resource](#Resource) |
+[📭Citation](#Citation) |
 
 
 <p align="center" width="100%">
