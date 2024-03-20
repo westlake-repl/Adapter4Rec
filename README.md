@@ -1,8 +1,39 @@
-# Adapter4Rec （WSDM2024）
+
+![](Fig/Adapter4Rec_banner.png) 
+
+
+# Adapter4Rec（WSDM2024）
+
+<a href="https://arxiv.org/abs/2305.15036" alt="arXiv"><img src="https://img.shields.io/badge/arXiv-2305.15036-FAA41F.svg?style=flat" /></a>
+<a href="https://dl.acm.org/doi/10.1145/3616855.3635805" alt="WSDM2024"><img src="https://img.shields.io/badge/WSDM-2024-%23002FA7.svg?style=flat" /></a> 
+<a href="https://zhuanlan.zhihu.com/p/684389843" alt="中文博客"><img src="https://img.shields.io/badge/博客-中文-orange.svg?style=flat" /></a> 
+<a href="https://medium.com/@lifengyi_6964/parameter-efficient-adapter-transfer-for-multi-domain-recommendation-329bf3c32a60" alt="blog"><img src="https://img.shields.io/badge/Blog-English-blue.svg?style=flat" /></a> 
+![Multi-Modal](https://img.shields.io/badge/Task-Multi--Modal-red) 
+![Foundation Model](https://img.shields.io/badge/Task-Foundation_Model-red) 
+![Transfer Learning](https://img.shields.io/badge/Task-Transfer_Learning-red) 
+![Recommendation](https://img.shields.io/badge/Task-Recommendation-red) 
+
+
+Quick Links: 
+[📋Blog](##Blog) |
+[🛠️Code](##Requirements) |
+[🗃️Resource](##Resource) |
+[📭Citation](##Citation) |
+
+
+<p align="center" width="100%">
+  <img src='https://camo.githubusercontent.com/ace7effc2b35cda2c66d5952869af563e851f89e5e1af029cfc9f69c7bebe78d/68747470733a2f2f692e696d6775722e636f6d2f77617856496d762e706e67' width="100%">
+</p>
+
+
 
 This repository contains the source code for our Paper: **''[Exploring Adapter-based Transfer Learning for Recommender Systems: Empirical Studies and Practical Insights](https://arxiv.org/pdf/2305.15036.pdf)''**.  
 
+## Blog
+
 【blog】 (1)https://zhuanlan.zhihu.com/p/684389843/ (2)https://medium.com/@lifengyi_6964/parameter-efficient-adapter-transfer-for-multi-domain-recommendation-329bf3c32a60
+
+## Resource
 
 🤗 **Resources**: four Large-scale datasets for evaluating foundation / transferable / multi-modal / LLM recommendaiton models.
 
@@ -15,7 +46,7 @@ This repository contains the source code for our Paper: **''[Exploring Adapter-b
 -  **MicroLens(DeepMind Talk)**: https://github.com/westlake-repl/MicroLens
 
 
-![](Fig/Adapter4Rec.jpg) 
+
 
 ## Abstract
 
@@ -23,7 +54,7 @@ Adapters, a plug-in neural network module with some tunable  parameters, have em
 
 To this end, we perform  empirical studies  to address several key sub-questions. First, we ask whether the adapter-based TransRec performs comparably to TransRec based on standard full-parameter fine-tuning? does it hold for recommendation with different item modalities, e.g., textual RS and visual RS. If yes, we benchmark these existing adapters, which have been shown to be effective in  NLP and CV tasks, in item recommendation tasks. Third, we carefully study several key factors for the adapter-based TransRec in terms of where and how to insert these adapters? Finally, we look at the effects of adapter-based TransRec by either scaling up its source training data or  scaling down its target training data. Our paper provides key insights and practical guidance on unified & transferable recommendation --- a less studied recommendation scenario.
 
-
+![](Fig/Adapter4Rec.jpg) 
 
 ## Requirements
 
@@ -33,6 +64,7 @@ To this end, we perform  empirical studies  to address several key sub-questions
 - transformers==4.20.1
 - loralib==0.1.1
 ```
+
 
 
 ## Preparation
@@ -89,4 +121,16 @@ python adapter_houlsby.py
 
 We report the test results of the checkpoint with the best validation result. 
 
+# Citation
+If you use our Adapter4Rec useful in your work, please cite our paper as:
+
+```bib
+@inproceedings{fu2024exploring,
+  title={Exploring adapter-based transfer learning for recommender systems: Empirical studies and practical insights},
+  author={Fu, Junchen and Yuan, Fajie and Song, Yu and Yuan, Zheng and Cheng, Mingyue and Cheng, Shenghui and Zhang, Jiaqi and Wang, Jie and Pan, Yunzhu},
+  booktitle={Proceedings of the 17th ACM International Conference on Web Search and Data Mining},
+  pages={208--217},
+  year={2024}
+}
+```
 
