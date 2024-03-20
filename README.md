@@ -122,7 +122,7 @@ python adapter_houlsby.py
 We report the test results of the checkpoint with the best validation result. 
 
 # Citation
-If you use our Adapter4Rec useful in your work, please cite our paper as:
+If you find our Adapter4Rec useful in your work, please cite our paper as:
 
 ```bib
 @inproceedings{fu2024exploring,
