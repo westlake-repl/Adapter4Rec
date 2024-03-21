@@ -100,7 +100,7 @@ The SASRec/CPC+BERT pretrained checkpoint should be placed under Downstream/Text
 ## Training
 
 An example of Source:
-For pretraining text TranRec:
+For pretraining text TransRec:
 
 ```
 cd Pretraining/Text/script
@@ -112,7 +112,7 @@ We select the checkpoint with the best validation result as the pre-trained chec
 
 
 An example of Downstream:
-For training text TranRec with the classic Houlsby adapter:
+For training text TransRec with the classic Houlsby adapter:
 
 ```
 cd Downstream/Text/script
